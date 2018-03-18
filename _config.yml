@@ -1,0 +1,19 @@
+title:             Innovator's Log
+email:             stanislav.siska@deutsche-boerse.com
+description:       Exploring and discovering
+author:            Start Bootstrap
+baseurl:           "/blog"
+url:               "http://blackrockdigital.github.io"
+
+# Social Profiles
+twitter_username:  InnoLab
+github_username:   InnoLabGit
+#facebook_username: StartBootstrap
+
+# Build settings
+markdown:          kramdown
+paginate:          5
+paginate_path:     "/posts/page:num/"
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
