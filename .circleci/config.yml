@@ -1,9 +1,14 @@
-dependencies:
-    override:
-        - sudo pip install awscli
-
-deployment:
-  prod:
-    branch: master
-    commands: 
-     - aws s3 sync ~/inno-lab-blog/_site s3://innovation-lab.cz/blog --delete
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.4
+    working_directory: ~/inno-lab-blog
+    steps:
+      - run:
+          name: Deploy to S3
+          command: 
+            - curl -O https://bootstrap.pypa.io/get-pip.py
+            - python get-pip.py --user
+            - pip install awscli --upgrade --user
+            - aws s3 sync /_site s3://innovation-lab.cz/blog/ --delete
