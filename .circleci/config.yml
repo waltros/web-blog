@@ -2,13 +2,20 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.4
-    working_directory: ~/inno-lab-blog
+      - image: circleci/ruby:2.2.9
+    working_directory:  /home/circleci/inno-lab-blog
     steps:
+      - checkout
       - run:
-          name: Deploy to S3
-          command: 
-            - curl -O https://bootstrap.pypa.io/get-pip.py
-            - python get-pip.py --user
-            - pip install awscli --upgrade --user
-            - aws s3 sync /_site s3://innovation-lab.cz/blog/ --delete
+          name: Install AWS-CLI & Jekyll
+          command: |
+            sudo apt-get -y -qq update
+            sudo apt-get install -y awscli jekyll
+      - run:
+          name: Jekyll Build step to create _site
+          command: |
+            jekyll build
+            ls -al /home/circleci/inno-lab-blog/_site
+      - run: 
+          name: Sync to S3 bucket
+          command: aws s3 sync $CIRCLE_WORKING_DIRECTORY/_site/ s3://innovation-lab.cz/blog/ --delete
