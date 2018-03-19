@@ -1,32 +1,9 @@
-version: 2
-jobs:
-  build-job:
-    docker:
-      - image: circleci/ruby:2.4-node
-    steps:
-      - run:
-          name: Greetings
-          command: 
-              # TODO Should have these setup correctly as (cached) dependencies
-              echo "Hello! The Innovation Lab Blog is being built.."
-              apk add --update py-pip python-dev
-              pip install awscli --upgrade --user
-  deploy-job:
-    docker:
-      - image: circleci/ruby:2.4-node
-    working_directory: /tmp/inno-lab-blog
-    steps:
-      - run:
-          name: Deploy to S3 if tests pass and branch is Master
-          command: aws s3 sync ./_site/* s3://innovation-lab.cz/blog/ --delete
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build-job
-      - deploy-job:
-          requires:
-            - build-job
-          filters:
-            branches:
-              only: master
+dependencies:
+    override:
+        - sudo pip install awscli
+
+deployment:
+  prod:
+    branch: master
+    commands: 
+     - aws s3 sync ~/inno-lab-blog/_site s3://innovation-lab.cz/blog --delete
