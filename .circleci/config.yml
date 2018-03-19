@@ -6,7 +6,11 @@ jobs:
     steps:
       - run:
           name: Greetings
-          command: echo "Hello! The Innovation Lab Blog is being built.."
+          command: 
+              # TODO Should have these setup correctly as (cached) dependencies
+              echo "Hello! The Innovation Lab Blog is being built.."
+              apk add --update py-pip python-dev
+              pip install awscli --upgrade --user
   deploy-job:
     docker:
       - image: circleci/ruby:2.4-node
