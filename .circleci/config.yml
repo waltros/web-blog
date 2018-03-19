@@ -10,7 +10,11 @@ jobs:
           name: Install AWS-CLI & Jekyll
           command: |
             sudo apt-get -y -qq update
-            sudo apt-get install -y awscli jekyll
+            sudo apt-get install -y python-pip python-dev jekyll
+      - run: 
+          name: Get pip
+          command: |
+            sudo pip install awscli
       - run:
           name: Jekyll Build step to create _site
           command: |
