@@ -17,3 +17,9 @@ paginate_path:     "/posts/page:num/"
 plugins:
   - jekyll-feed
   - jekyll-paginate
+
+exclude:  
+  - Gemfile
+  - Gemfile.lock
+  - vendor/bundle
+  - circle.yml
