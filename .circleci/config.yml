@@ -18,4 +18,4 @@ jobs:
             ls -al /home/circleci/inno-lab-blog/_site
       - run: 
           name: Sync to S3 bucket
-          command: aws s3 sync $CIRCLE_WORKING_DIRECTORY/_site/ s3://innovation-lab.cz/blog/ --delete
+          command: aws s3 sync $CIRCLE_WORKING_DIRECTORY/_site/ s3://innovation-lab.cz/blog/ --delete --region eu-central-1
