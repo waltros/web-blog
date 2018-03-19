@@ -1,5 +1,8 @@
-deployment:
-  prod:
-    branch: master
-    commands:
-      - aws s3 sync ./_site/* s3://innovation-lab.cz/blog/ --delete
+version: 2
+jobs:
+  deploy-job:
+    working_directory: ~/inno-lab-blog
+    steps:
+      - run:
+          name: Deploy to S3 if tests pass and branch is Master
+          command: aws s3 sync ./_site/* s3://innovation-lab.cz/blog/ --delete
