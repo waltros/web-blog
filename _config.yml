@@ -3,7 +3,7 @@ email:             stanislav.siska@deutsche-boerse.com
 description:       Exploring and discovering
 author:            Start Bootstrap
 baseurl:           "/blog"
-url:               "http://blackrockdigital.github.io"
+url:               "https://innovation-lab.cz"
 permalink:         "/:categories/:title:output_ext"
 
 # Social Profiles
