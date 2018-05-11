@@ -1,7 +1,7 @@
 title:             Innovator's Log
 email:             stanislav.siska@deutsche-boerse.com
 description:       Exploring and discovering
-author:            Start Bootstrap
+author:            Innovation Lab Prague
 baseurl:           "/blog"
 url:               "https://innovation-lab.cz"
 permalink:         "/:categories/:title:output_ext"
