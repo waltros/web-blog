@@ -19,6 +19,7 @@ jobs:
           name: Jekyll Build step to create _site
           command: |
             jekyll build
+            cat $CIRCLE_WORKING_DIRECTORY/_site/index.html
             ls -al /home/circleci/inno-lab-blog/_site
       - run: 
           name: Sync to S3 bucket
