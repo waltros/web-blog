@@ -16,7 +16,7 @@ jobs:
       - run:
           name: Install Jekyll and dependencies
           command: |
-            gem install rake:10.4.2 jekyll bundler
+            gem install jekyll bundler
             bundle install
 
       - run:
