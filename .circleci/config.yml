@@ -2,25 +2,28 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.2.9
-    working_directory:  /home/circleci/inno-lab-blog
+      - image: circleci/ruby:2.5.1
+    working_directory:  /home/circleci/innovation-lab-blog
     steps:
       - checkout
       - run:
-          name: Install AWS-CLI & Jekyll
+          name: Install Python and AWS-CLI
           command: |
             sudo apt-get -y -qq update
-            sudo apt-get install -y python-pip python-dev jekyll
-      - run: 
-          name: Get pip
-          command: |
+            sudo apt-get install -y python-pip python-dev ruby ruby-dev build-essential
             sudo pip install awscli
+
+      - run:
+          name: Install Jekyll and dependencies
+          command: |
+            gem install rake:10.4.2 jekyll bundler
+            bundle install
+
       - run:
           name: Jekyll Build step to create _site
           command: |
+            jekyll --version
             jekyll build
-            cat $CIRCLE_WORKING_DIRECTORY/_site/index.html
-            ls -al /home/circleci/inno-lab-blog/_site
       - run: 
           name: Sync to S3 bucket
           command: aws s3 sync $CIRCLE_WORKING_DIRECTORY/_site/ s3://innovation-lab.cz/blog/ --delete --region eu-central-1
